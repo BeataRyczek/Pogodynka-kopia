@@ -1,0 +1,7 @@
+
+2018-03-05T16:34:38.846     WeatherModel{cityName='krakow', temp=277, pressure=1002, humidity=51, clouds=0, weatherComment='Clear'}
+2018-03-05T16:35:12.263     WeatherModel{cityName='Krakow', temp=277, pressure=1002, humidity=51, clouds=0, weatherComment='Clear'}
+2018-03-06T09:38:04.166     WeatherModel{cityName='Krakow', temp=274, pressure=996, humidity=69, clouds=40, weatherComment='Clouds'}
+2018-03-06T10:47:14.431     WeatherModel{cityName='Krakow', temp=276, pressure=995, humidity=64, clouds=92, weatherComment='Haze'}
+2018-03-06T18:52:19.216     WeatherModel{cityName='KRAKÓW', temp=276, pressure=992, humidity=93, clouds=75, weatherComment='Clouds'}
+2018-03-06T19:17:30.446     WeatherModel{cityName='Kraków', temp=276, pressure=992, humidity=93, clouds=75, weatherComment='Clouds'}
