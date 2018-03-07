@@ -15,7 +15,7 @@ public class WeatherServiceForecast {
     private WeatherServiceForecast() {
     }
 
-    public WeatherModel getWeather(String city){
+    public WeatherModel getWeather(String city, int j){
 
     String websiteResponse = Utils.readWebsiteContent("http://http://api.openweathermap.org/data/2.5/forecast?q=" + city + ",pl&appid=88095a62ecd9fee86c8365defdd57b25");
     String description = null;
@@ -23,6 +23,7 @@ public class WeatherServiceForecast {
     int pressure=0;
     int humidity =0;
     int clouds = 0;
+    String dt_txt = null;
 
     JSONObject root = new JSONObject(websiteResponse);
     JSONArray listArray = root.getJSONArray("list");
@@ -41,7 +42,7 @@ public class WeatherServiceForecast {
         JSONObject cloudsObject = elementListArray.getJSONObject("clouds");
         clouds = cloudsObject.getInt("all");
 
-
+        dt_txt=elementListArray.getString("dt_txt");
 
 
       return new WeatherModel
@@ -49,8 +50,9 @@ public class WeatherServiceForecast {
                 .setClouds(clouds)
                 .setHumidity(humidity)
                 .setPressure(pressure)
-                .setTemp(temp)
+                .setTemperature(temp)
                 .setWeatherComment(description)
+                .setDt_txt(dt_txt)
                 .build();
 
 }
