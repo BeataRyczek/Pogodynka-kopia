@@ -17,32 +17,33 @@ public class WeatherServiceForecast {
 
     public WeatherModel getWeather(String city, int j){
 
-    String websiteResponse = Utils.readWebsiteContent("http://http://api.openweathermap.org/data/2.5/forecast?q=" + city + ",pl&appid=88095a62ecd9fee86c8365defdd57b25");
+    String websiteResponse = Utils.readWebsiteContent("http://api.openweathermap.org/data/2.5/forecast?q=" + city + ",pl&appid=88095a62ecd9fee86c8365defdd57b25");
     String description = null;
-    int temp=0;
-    int pressure=0;
-    int humidity =0;
-    int clouds = 0;
+    int temperature;
+    int pressure;
+    int humidity ;
+    int clouds ;
     String dt_txt = null;
 
     JSONObject root = new JSONObject(websiteResponse);
     JSONArray listArray = root.getJSONArray("list");
-    JSONObject elementListArray = listArray.getJSONObject(1);
-    JSONObject mainObject = elementListArray.getJSONObject("main");
+    JSONObject elementInArrayList = listArray.getJSONObject(j);
 
-    temp = (int) mainObject.getFloat("temp");
-    pressure = mainObject.getInt("pressure");
-    humidity = mainObject.getInt("humidity");
-
-    JSONArray weatherArray = elementListArray.getJSONArray("weather");
-        for (int i = 0; i < weatherArray.length(); i++) {
-            JSONObject elementInArrayWeather = weatherArray.getJSONObject(i);
-            description = elementInArrayWeather.getString("description");
+    JSONArray weatherObject = elementInArrayList.getJSONArray("weather");
+        for (int i = 0; i < weatherObject.length(); i++) {
+            JSONObject elementInArray = weatherObject.getJSONObject(i);
+            description = elementInArray.getString("main");
         }
-        JSONObject cloudsObject = elementListArray.getJSONObject("clouds");
+        JSONObject main = elementInArrayList.getJSONObject("main");
+
+        temperature = (int) main.getFloat("temp");
+        pressure = main.getInt("pressure");
+        humidity = main.getInt("humidity");
+
+        JSONObject cloudsObject = elementInArrayList.getJSONObject("clouds");
         clouds = cloudsObject.getInt("all");
 
-        dt_txt=elementListArray.getString("dt_txt");
+        dt_txt = elementInArrayList.getString("dt_txt");
 
 
       return new WeatherModel
@@ -50,7 +51,7 @@ public class WeatherServiceForecast {
                 .setClouds(clouds)
                 .setHumidity(humidity)
                 .setPressure(pressure)
-                .setTemperature(temp)
+                .setTemperature(temperature -273)
                 .setWeatherComment(description)
                 .setDt_txt(dt_txt)
                 .build();

@@ -22,7 +22,7 @@ public class WeatherService {
     }
 
     public WeatherModel getWeather(String city) {
-        String websiteResponse = Utils.readWebsiteContent("http://api.openweathermap.org/data/2.5/weather?q=" + city + ",pl&appid=88095a62ecd9fee86c8365defdd57b25");
+        String websiteResponse = Utils.readWebsiteContent("http://api.openweathermap.org/data/2.5/forecast?q=" + city + ",pl&appid=88095a62ecd9fee86c8365defdd57b25");
         String description = null;
         int temperature;
         int pressure;
